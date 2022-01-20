@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boolzapp</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+</head>
+<body>
+    
+    <div id="myapp">
+
+        <header>
+            
+            <div class="container">
+
+                <div id="user-panel" class='left'>
+
+                    <div class='user-panel-content'>
+                        <div class="user-info">
+                            <div class="img-box">
+                                <img src="img/image_1.png" alt="">
+                            </div>
+                            <h4 id='username'>Nome utente</h4>
+                        </div>
+                        <div class="options">
+                            <i class="fas fa-circle-notch"></i>
+                            <i class="fas fa-comment-alt"></i>
+                            <i class="fas fa-ellipsis-v"></i>
+                        </div>
+                    </div>
+
+                    <aside id="chat-list">
+                        
+                        <div id="notifications" class='entry'>
+                            <div class="img-box">
+                                <i class="fas fa-bell-slash"></i>
+                            </div>
+                            <div class="text">
+                                <h4>Ricevi notifiche di nuovi messaggi</h4>
+                                <a href="" class='meta'>Attiva notifiche desktop</a>
+                            </div>
+                        </div>
+
+                        <div id="chat-search">
+                            <div class="input-box">
+                                <label for="search"><i class="fas fa-search"></i></label>
+                                <input id='search' type="text" placeholder="Cerca o inizia una nuova chat">
+                            </div>
+                        </div>
+                        
+                        <ul>
+                            <li class='entry'>
+                                <div class="img-box">
+                                    <img src="img/image_2.png" alt="">
+                                </div>
+                                <div class="entry-info">
+                                    <div class='entry-name'>Nome</div>
+                                    <span class='message-preview meta'>prova</span>
+                                </div>
+                            </li>
+                            <li class='entry active'>
+                                <div class="img-box">
+                                    <img src="img/image_3.png" alt="">
+                                </div>
+                                <div class="entry-info">
+                                    <time class='meta'>20/03/2020 - 16:35</time>
+                                    <div lcass='entry-name'>Nome</div>
+                                    <span class='message-preview meta'>prova</span>
+                                </div>
+                            </li>
+                            <li>
+
+                            </li>
+                            <li>
+
+                            </li>
+                        </ul>
+                    </aside>
+                </div>
+                <div id="chat-panel" class='right'>
+                    <div class='user-info'>
+                        <div class="img-box">
+                            <img src="img/image_3.png" alt="">
+                        </div>
+                        <div class="user-meta">
+                            <h4 class='username'>Nome</h4>
+                            <div class="latest-access meta">Ultimo accesso oggi alle</div>
+                        </div>
+                    </div>
+
+                    <div class="options">
+                        <i class="fas fa-search"></i>
+                        <i class="fas fa-paperclip"></i>
+                        <i class="fas fa-ellipsis-v"></i>
+                    </div>
+                </div>
+            </div>
+            
+        </header>
+        
+        
+        <main>
+            <div class="container">
+                <div class="left"></div>
+                <div id="chat">
+
+                    <div class="messages">
+
+                        <div class="message sent">
+                            <span class='text'>Ciao aslkdfjòalskdjfòlkasjdfòlkajsdòlfkasòdjfòkasjdfklasdlf
+                                asdfòalsdkjfòlaskdjflòkasjdòlfkjasòdlkfjaòslkdjfòlaksjdflòkjasdòlkfjaòlskd
+                                aòlskdjfòlaksjdflòkjasd
+                            </span>
+                            <time class='meta'>20/03/2020 - 16:35</time>
+                        </div>
+                        <div class="message received">
+                            <span class='text'>ok</span>
+                            <time class='meta'>20/03/2020 - 16:35</time>
+                        </div>
+                    </div>
+
+                    <div id="input-bar">
+                        <i class="far fa-smile fa-2x"></i>
+                        <input type="text">
+                        <i class="fas fa-microphone fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        
+        
+        
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
