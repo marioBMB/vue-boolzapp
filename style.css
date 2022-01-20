@@ -67,7 +67,7 @@ header .container > div {
     align-items: center;
 }
 
-header .left {
+header .left, main .left {
     border-right: 1px solid #ccc;
 }
 
@@ -315,7 +315,8 @@ li.entry.active {
 }
 
 .entry-info{
-    float: right;
+    flex-grow: 2;
+    position: relative;
 }
 
 .entry-info time {
@@ -323,4 +324,10 @@ li.entry.active {
     top: 0;
     right: 5px;
     font-size: 0.8rem;
+}
+
+
+li.entry {
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
 }

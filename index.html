@@ -21,9 +21,9 @@
                     <div class='user-panel-content'>
                         <div class="user-info">
                             <div class="img-box">
-                                <img src="img/image_1.png" alt="">
+                                <img :src="'img/image'+user.avatar+'.png'" alt="">
                             </div>
-                            <h4 id='username'>Nome utente</h4>
+                            <h4 id='username'>{{user.name}}</h4>
                         </div>
                         <div class="options">
                             <i class="fas fa-circle-notch"></i>
@@ -52,30 +52,16 @@
                         </div>
                         
                         <ul>
-                            <li class='entry'>
+                            <li v-for="(contact,index) in contacts" class='entry' :class='{active: index == activeContact}'
+                            @click="setactive(index)">
                                 <div class="img-box">
-                                    <img src="img/image_2.png" alt="">
+                                    <img :src="'img/image'+contact.avatar+'.png'" alt="">
                                 </div>
                                 <div class="entry-info">
-                                    <div class='entry-name'>Nome</div>
-                                    <span class='message-preview meta'>prova</span>
+                                    <time class='meta'>{{contact.messages[contact.messages.length - 1].date}}</time>
+                                    <div class='entry-name'>{{contact.name}}</div>
+                                    <span class='message-preview meta'>{{contact.messages[contact.messages.length - 1].text}}</span>
                                 </div>
-                            </li>
-                            <li class='entry active'>
-                                <div class="img-box">
-                                    <img src="img/image_3.png" alt="">
-                                </div>
-                                <div class="entry-info">
-                                    <time class='meta'>20/03/2020 - 16:35</time>
-                                    <div lcass='entry-name'>Nome</div>
-                                    <span class='message-preview meta'>prova</span>
-                                </div>
-                            </li>
-                            <li>
-
-                            </li>
-                            <li>
-
                             </li>
                         </ul>
                     </aside>
@@ -83,11 +69,13 @@
                 <div id="chat-panel" class='right'>
                     <div class='user-info'>
                         <div class="img-box">
-                            <img src="img/image_3.png" alt="">
+                            <img :src="'img/image'+contacts[activeContact].avatar+'.png'" alt="">
                         </div>
                         <div class="user-meta">
-                            <h4 class='username'>Nome</h4>
-                            <div class="latest-access meta">Ultimo accesso oggi alle</div>
+                            <h4 class='username'>{{contacts[activeContact].name}}</h4>
+                            <div class="latest-access meta">Ultimo accesso oggi alle 
+                                {{contacts[activeContact].messages[contacts[activeContact].messages.length - 1].date}}
+                            </div>
                         </div>
                     </div>
 
@@ -109,22 +97,16 @@
 
                     <div class="messages">
 
-                        <div class="message sent">
-                            <span class='text'>Ciao aslkdfjòalskdjfòlkasjdfòlkajsdòlfkasòdjfòkasjdfklasdlf
-                                asdfòalsdkjfòlaskdjflòkasjdòlfkjasòdlkfjaòslkdjfòlaksjdflòkjasdòlkfjaòlskd
-                                aòlskdjfòlaksjdflòkjasd
-                            </span>
-                            <time class='meta'>20/03/2020 - 16:35</time>
+                        <div v-for='message in contacts[activeContact].messages' class="message" :class="message.status">
+                            <span class='text'>{{message.text}}</span>
+                            <time class='meta'>{{message.time}}</time>
                         </div>
-                        <div class="message received">
-                            <span class='text'>ok</span>
-                            <time class='meta'>20/03/2020 - 16:35</time>
-                        </div>
+
                     </div>
 
                     <div id="input-bar">
                         <i class="far fa-smile fa-2x"></i>
-                        <input type="text">
+                        <input type="text" placeholder="Scrivi un messaggio...">
                         <i class="fas fa-microphone fa-2x"></i>
                     </div>
                 </div>
