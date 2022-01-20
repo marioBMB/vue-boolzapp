@@ -5,6 +5,7 @@ let app = new Vue({
 
         inputIcon: "fas fa-microphone",
         inputValue: "",
+        inputSearchValue: "",
         activeContact: 1,
         user: {
             name: 'Mario',
@@ -91,6 +92,7 @@ let app = new Vue({
                 ],
             }
         ],
+        filteredContacts: [],
     },
     methods: {
 
@@ -136,13 +138,25 @@ let app = new Vue({
             return message;
         },
         latestMessage: function(contactIndex){
-            
+
             let activeMessages = this.contacts[contactIndex].messages;
             return activeMessages[activeMessages.length - 1];
+        },
+
+        filterInput: function(){
+
+            this.filteredContacts = this.contacts.filter((item) => {
+
+                return item.name.includes(this.inputSearchValue);
+
+            });
         }
-    },
-    computed: {
         
+    },
+    mounted: function(){
+
+        this.filteredContacts = this.contacts;
+
     },
 
 
