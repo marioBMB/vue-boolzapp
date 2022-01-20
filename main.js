@@ -3,9 +3,11 @@ let app = new Vue({
     el: '#myapp',
     data: {
 
+        inputIcon: "fas fa-microphone",
+        inputValue: "",
         activeContact: 1,
         user: {
-            name: 'Nome Utente',
+            name: 'Mario',
             avatar: '_0',
         },
         contacts: [
@@ -25,7 +27,7 @@ let app = new Vue({
                         status: 'sent',
                     },
                     {
-                        date: '10/01/2020 16:15:',
+                        date: '10/01/2020 16:15:05',
                         text: 'Tutto fatto!',
                         status: 'received',
                     },
@@ -88,16 +90,59 @@ let app = new Vue({
                     }
                 ],
             }
-        ]
+        ],
     },
     methods: {
 
-        setactive: function(index){
+        setActive: function(index){
             this.activeContact = index;
         },
-    },
-    mounted: {
+        handleInput: function(event){
+            
+            console.log(event.key);
+            if (event.key == "Enter"){
+                this.submitMessage();
+            }
+        },
+        submitMessage: function(){
+            
+            let newMessage = this.createMessage(this.inputValue, true);
+            this.inputValue = "";
+            this.contacts[this.activeContact].messages.push(newMessage);
+            setTimeout(this.simulateAnswer, 1000);
+        },
+        simulateAnswer: function(){
+            
+            let newMessage = this.createMessage("ok", false);
+            this.contacts[this.activeContact].messages.push(newMessage);
+        },
 
+        createMessage: function(value, sent){
+
+            let message = {
+                date: '',
+                text: value != "" ? value : '',
+                status: sent ? 'sent' : 'received'
+            };
+
+            var today  = new Date();
+            let Y = new Intl.DateTimeFormat('it', { year: 'numeric' }).format(today);
+            let M = new Intl.DateTimeFormat('it', { month: '2-digit' }).format(today);
+            let D = new Intl.DateTimeFormat('it', { day: '2-digit' }).format(today);
+            let H = new Intl.DateTimeFormat('it', { hour: '2-digit' }).format(today);
+            let m = new Intl.DateTimeFormat('it', { minute: '2-digit' }).format(today);
+            
+            message.date = `${D}/${M}/${Y} ${H}:${m}`;
+            return message;
+        },
+        latestMessage: function(contactIndex){
+            
+            let activeMessages = this.contacts[contactIndex].messages;
+            return activeMessages[activeMessages.length - 1];
+        }
+    },
+    computed: {
+        
     },
 
 

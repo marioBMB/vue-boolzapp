@@ -53,14 +53,14 @@
                         
                         <ul>
                             <li v-for="(contact,index) in contacts" class='entry' :class='{active: index == activeContact}'
-                            @click="setactive(index)">
+                            @click="setActive(index)">
                                 <div class="img-box">
                                     <img :src="'img/image'+contact.avatar+'.png'" alt="">
                                 </div>
                                 <div class="entry-info">
-                                    <time class='meta'>{{contact.messages[contact.messages.length - 1].date}}</time>
+                                    <time class='meta'>{{latestMessage(index).date}}</time>
                                     <div class='entry-name'>{{contact.name}}</div>
-                                    <span class='message-preview meta'>{{contact.messages[contact.messages.length - 1].text}}</span>
+                                    <span class='message-preview meta'>{{latestMessage(index).text}}</span>
                                 </div>
                             </li>
                         </ul>
@@ -73,8 +73,7 @@
                         </div>
                         <div class="user-meta">
                             <h4 class='username'>{{contacts[activeContact].name}}</h4>
-                            <div class="latest-access meta">Ultimo accesso oggi alle 
-                                {{contacts[activeContact].messages[contacts[activeContact].messages.length - 1].date}}
+                            <div class="latest-access meta">Ultimo accesso oggi alle {{latestMessage(activeContact).date}}
                             </div>
                         </div>
                     </div>
@@ -85,36 +84,34 @@
                         <i class="fas fa-ellipsis-v"></i>
                     </div>
                 </div>
+                
             </div>
-            
         </header>
-        
-        
+           
         <main>
             <div class="container">
+                
                 <div class="left"></div>
-                <div id="chat">
+
+                <div id="chat" class='right'>
 
                     <div class="messages">
 
                         <div v-for='message in contacts[activeContact].messages' class="message" :class="message.status">
                             <span class='text'>{{message.text}}</span>
-                            <time class='meta'>{{message.time}}</time>
+                            <time class='meta'>{{message.date}}</time>
                         </div>
-
                     </div>
 
-                    <div id="input-bar">
+                    <div id="input-bar" @keyup="handleInput">
                         <i class="far fa-smile fa-2x"></i>
-                        <input type="text" placeholder="Scrivi un messaggio...">
-                        <i class="fas fa-microphone fa-2x"></i>
+                        <input type="text" v-model="inputValue" placeholder="Scrivi un messaggio...">
+                        <i v-if="inputValue.length == 0" class='fas fa-microphone' @click='submitMessage()'></i>
+                        <i v-else class="fas fa-paper-plane rotated"></i>
                     </div>
                 </div>
             </div>
         </main>
-
-        
-        
         
     </div>
 
