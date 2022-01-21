@@ -16,6 +16,7 @@ let app = new Vue({
                 name: 'Michele',
                 avatar: '_1',
                 visible: true,
+                storedInput: "",
                 messages: [
                     {
                         date: '10/01/2020 15:30:55',
@@ -38,6 +39,7 @@ let app = new Vue({
                 name: 'Fabio',
                 avatar: '_2',
                 visible: true,
+                storedInput: "",
                 messages: [
                     {
                         date: '20/03/2020 16:30:00',
@@ -59,6 +61,7 @@ let app = new Vue({
                 name: 'Samuele',
                 avatar: '_3',
                 visible: true,
+                storedInput: "",
                 messages: [
                     {
                         date: '28/03/2020 10:10:40',
@@ -80,6 +83,7 @@ let app = new Vue({
                 name: 'Luisa',
                 avatar: '_4',
                 visible: true,
+                storedInput: "",
                 messages: [
                     {   date: '10/01/2020 15:30:55',
                         text: 'Lo sai che ha aperto una nuova pizzeria?',
@@ -100,10 +104,13 @@ let app = new Vue({
             this.activeContact = index;
         },
         handleInput: function(event){
-            
-            console.log(event.key);
+
+            if (this.inputValue.trim() == ""){
+                this.inputValue = "";
+            }
             if (event.key == "Enter"){
                 this.submitMessage();
+                this.contacts[this.activeContact].sotredInput = this.inputValue;
             }
         },
         submitMessage: function(){
@@ -111,7 +118,12 @@ let app = new Vue({
             let newMessage = this.createMessage(this.inputValue, true);
             this.inputValue = "";
             this.contacts[this.activeContact].messages.push(newMessage);
-            setTimeout(this.simulateAnswer, 1000);
+            
+            // setTimeout(this.simulateAnswer, 1000);
+        },
+        removeMessage: function(index){
+
+            this.contacts[this.activeContact].messages.splice(index, 1);
         },
         simulateAnswer: function(){
             
@@ -122,19 +134,11 @@ let app = new Vue({
         createMessage: function(value, sent){
 
             let message = {
-                date: '',
+                date: dayjs().format("DD/MM/YYYY HH:mm:ss"),
                 text: value != "" ? value : '',
                 status: sent ? 'sent' : 'received'
             };
 
-            var today  = new Date();
-            let Y = new Intl.DateTimeFormat('it', { year: 'numeric' }).format(today);
-            let M = new Intl.DateTimeFormat('it', { month: '2-digit' }).format(today);
-            let D = new Intl.DateTimeFormat('it', { day: '2-digit' }).format(today);
-            let H = new Intl.DateTimeFormat('it', { hour: '2-digit' }).format(today);
-            let m = new Intl.DateTimeFormat('it', { minute: '2-digit' }).format(today);
-            
-            message.date = `${D}/${M}/${Y} ${H}:${m}`;
             return message;
         },
         latestMessage: function(contactIndex){
@@ -148,18 +152,24 @@ let app = new Vue({
             this.filteredContacts = this.contacts.filter((item) => {
 
                 return item.name.includes(this.inputSearchValue);
-
             });
+        },
+        scrollChat: function(){
+            let box = document.querySelector(".messages");
+            box.scrollTop = box.scrollHeight;
+            console.log(box.scrollHeight);
+        },
+        isEmptyString(value){
+
+            return value.trim().length == 0;
         }
         
     },
     mounted: function(){
 
         this.filteredContacts = this.contacts;
-
     },
-
-
+    updated: function(){ this.scrollChat() },
 
 
 });

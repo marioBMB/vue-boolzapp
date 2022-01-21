@@ -126,6 +126,7 @@ aside ul {
     text-align: center;
     background-color: white;
     margin: 0 5px;
+    flex-shrink: 0;
 }
 
 .img-box img {
@@ -183,6 +184,7 @@ aside ul {
     padding: 10px;
     background: rgba(229, 221, 213, 1);
     position: relative;
+    z-index: 2;
 }
 
 #chat::before {
@@ -280,23 +282,31 @@ li.entry.active {
 
 
 .messages {
-    margin: 10px 5% 50px 5%;
+    margin: 10px 5% 0 5%;
     position: relative;
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: calc(100% - 50px);
+    z-index: 2;
 }
 
 .message {
     background-color: red;
     color: black;
-    min-height: 3.5rem;
-    border-radius: 8px;
-    padding: 1rem;
     max-width: 58%;
+    min-height: 3.5rem;
+    margin: 2px 3rem;
+    padding: 1rem 1.5rem 1rem 1rem;
     min-width: 250px;
-    position: relative;
     word-break: break-word;
-    margin: 0.5rem 3rem;
-    text-align: justify;
+    border-radius: 8px;
+    box-shadow: 1px 1px 1px #bbb;
+    cursor: pointer;
+    position: relative;
+}
+
+.message:last-child {
+    margin-bottom: 50px;
 }
 
 .message.sent{
@@ -313,7 +323,11 @@ li.entry.active {
 
 .message-preview {
     font-size: 0.9rem;
+    line-height: 0.9rem;
+    white-space: nowrap;
+    overflow: hidden;
     text-overflow: ellipsis;
+    flex-grow: 1;
 }
 
 
@@ -342,6 +356,7 @@ li.entry.active {
     flex-grow: 2;
     position: relative;
     height: 50px;
+    overflow: hidden;
 }
 
 .entry-info time {
@@ -370,6 +385,96 @@ li.entry:not(.active):hover {
 
 .rotated {
     transform: rotate(50deg);
+}
+
+
+.message.sent:first-of-type::after, .message.received + .message.sent::after{
+    content: "";
+    width: 0;
+    height: 0;
+    border-top: 7px solid transparent;
+    border-left: 10px solid #d4fbc4;
+    border-bottom: 7px solid transparent;
+    margin-left: 10px;
+    position: absolute;
+    float: right !important;
+    right: -5px;
+    top: -2px;
+    transform: rotate(90deg);
+    border-radius: 3px;
+} 
+
+
+.message.received:first-of-type::after, .message.sent + .message.received::after{
+    content: "";
+    width: 0;
+    height: 0;
+    border-top: 7px solid transparent;
+    border-left: 10px solid white;
+    border-bottom: 7px solid transparent;
+    margin-left: 10px;
+    position: absolute;
+    float: right !important;
+    left: -15px;
+    top: -2px;
+    transform: rotate(90deg);
+    border-radius: 3px;
+} 
+
+.message-dropdown {
+    display: none;
+    position: absolute;
+    z-index: 999;
+    width: max-content;
+    height: 80px;
+    background: white;
+    top: 100%;
+    opacity: 0.97;
+    list-style: none;
+    text-align: center;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.26),0 2px 10px 0 rgba(0,0,0,.16);
+    padding: 5px 0;
+}
+
+.message-dropdown li {
+    height: 50%;
+    width: 100%;
+    margin: 0 auto;
+    padding: 10px !important;
+}
+
+.message-dropdown li:hover {
+    background-color: #f6f6f6;
+}
+
+
+.message .text {
+    width: 100%;
+    display: inline-block;
+}
+
+.message-options {
+    width: 1.4rem;
+    display: inline-block;
+    position: absolute;
+    top: 10px;
+    right: 0;
+}
+
+.options-icon {
+    visibility: hidden;
+    color: #c4bdb7;
+    display: inline-block;
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+.message-options:hover .message-dropdown, .message-dropdown:hover {
+    display: block;
+}
+
+.message:hover .options-icon {
+    visibility: visible;
 }
 
 

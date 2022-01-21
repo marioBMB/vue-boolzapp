@@ -97,16 +97,24 @@
 
                     <div class="messages">
 
-                        <div v-for='message in contacts[activeContact].messages' class="message" :class="message.status">
+                        <div v-for='(message, index) in contacts[activeContact].messages' class="message" :class="message.status">
                             <span class='text'>{{message.text}}</span>
                             <time class='meta'>{{message.date}}</time>
+
+                            <div class="message-options">
+                                <i class="options-icon fas fa-chevron-down"></i>
+                                <ul class="message-dropdown">
+                                    <li class='info'>Info messaggio</li>
+                                    <li class='delete' @click="removeMessage(index)">Elimina</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
 
                     <div id="input-bar" @keyup="handleInput">
                         <i class="far fa-smile fa-2x"></i>
                         <input type="text" v-model="inputValue" placeholder="Scrivi un messaggio...">
-                        <i v-if="inputValue.length == 0" class='fas fa-microphone' @click='submitMessage()'></i>
+                        <i v-if="isEmptyString(inputValue)" class='fas fa-microphone' @click='submitMessage()'></i>
                         <i v-else class="fas fa-paper-plane rotated"></i>
                     </div>
                 </div>
@@ -116,6 +124,7 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
     <script src="main.js"></script>
 </body>
 </html>
