@@ -114,7 +114,7 @@
                     <div id="input-bar" @keyup="handleInput">
                         <i class="far fa-smile fa-2x"></i>
                         <input type="text" v-model="inputValue" placeholder="Scrivi un messaggio...">
-                        <i v-if="isEmptyString(inputValue)" class='fas fa-microphone' @click='submitMessage()'></i>
+                        <i v-if="isEmptyString(inputVlue)" class='fas fa-microphone' @click='submitMessage()'></i>
                         <i v-else class="fas fa-paper-plane rotated"></i>
                     </div>
                 </div>
