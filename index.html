@@ -82,8 +82,8 @@
                             </div>
                             <div class="user-meta">
                                 <h4 class='username'>{{contacts[activeContact].name}}</h4>
-                                <div class="latest-access meta">Ultimo accesso oggi alle {{latestMessage(activeContact).date}}
-                                </div>
+                                <span v-if="isActiveUser(activeContact)" id='status' class='meta'>{{status[contacts[activeContact].statusCode]}}</span>
+                                <div v-else id="latest-access" class='meta'>ultimo accesso: {{latestMessage(activeContact).date}}</div>
                             </div>
                         </div>
 

@@ -17,6 +17,11 @@ body {
 
 .meta {
     color: #b1b0b2;
+    font-size: 0.8rem;
+}
+
+#status {
+    font-size: 0.8rem;
 }
 
 i {
@@ -366,6 +371,11 @@ li.entry.active {
 
 .message .meta {
     font-size: 0.8rem;
+}
+
+.status {
+    font-size: 0.8rem;
+    color: #51585c;
 }
 
 .entry .img-box {

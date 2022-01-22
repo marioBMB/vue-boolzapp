@@ -11,25 +11,27 @@ let app = new Vue({
             name: 'Mario',
             avatar: '_0',
         },
+        status: ['', 'online', 'sta scrivendo...'],
         contacts: [
             {
                 name: 'Michele',
                 avatar: '_1',
+                statusCode: 0,  /* 0 standBy 1 activeUser 2 writing */
                 visible: true,
                 storedInput: "",
                 messages: [
                     {
-                        date: '10/01/2020 15:30:55',
+                        date: '10/01/2020 15:30',
                         text: 'Hai portato a spasso il cane?',
                         status: 'sent',
                     },
                     {
-                        date: '10/01/2020 15:50:00',
+                        date: '10/01/2020 15:50',
                         text: 'Ricordati di dargli da mangiare',
                         status: 'sent',
                     },
                     {
-                        date: '10/01/2020 16:15:05',
+                        date: '10/01/2020 16:15',
                         text: 'Tutto fatto!',
                         status: 'received',
                     },
@@ -38,16 +40,17 @@ let app = new Vue({
             {
                 name: 'Fabio',
                 avatar: '_2',
+                statusCode: 0,
                 visible: true,
                 storedInput: "",
                 messages: [
                     {
-                        date: '20/03/2020 16:30:00',
+                        date: '20/03/2020 16:30',
                         text: 'Ciao come stai?',
                         status: 'sent'
                     },
                     {
-                        date: '20/03/2020 16:30:55',
+                        date: '20/03/2020 16:30',
                         text: 'Bene grazie! Stasera ci vediamo?',
                         status: 'received'
                     },
@@ -60,6 +63,7 @@ let app = new Vue({
             {
                 name: 'Samuele',
                 avatar: '_3',
+                statusCode: 0,
                 visible: true,
                 storedInput: "",
                 messages: [
@@ -69,11 +73,11 @@ let app = new Vue({
                         status: 'received'
                     },
                     {
-                        date: '28/03/2020 10:20:10',
+                        date: '28/03/2020 10:20',
                         text: 'Sicuro di non aver sbagliato chat?',
                         status: 'received'
                     },
-                    {   date: '28/03/2020 16:15:22',
+                    {   date: '28/03/2020 16:15',
                         text: 'Ah scusa',
                         status: 'sent'
                     }
@@ -82,14 +86,15 @@ let app = new Vue({
             {
                 name: 'Luisa',
                 avatar: '_4',
+                statusCode: 0,
                 visible: true,
                 storedInput: "",
                 messages: [
-                    {   date: '10/01/2020 15:30:55',
+                    {   date: '10/01/2020 15:30',
                         text: 'Lo sai che ha aperto una nuova pizzeria?',
                         status: 'sent'
                     },
-                    {   date: '10/01/2020 15:50:00',
+                    {   date: '10/01/2020 15:50',
                         text: 'Si, ma preferirei andare al cinema',
                         status: 'received'
                     }
@@ -118,8 +123,7 @@ let app = new Vue({
             let newMessage = this.createMessage(this.inputValue, true);
             this.inputValue = "";
             this.contacts[this.activeContact].messages.push(newMessage);
-            
-            // setTimeout(this.simulateAnswer, 1000);
+            this.simulateAnswer();
         },
         removeMessage: function(index){
 
@@ -127,10 +131,20 @@ let app = new Vue({
         },
         simulateAnswer: function(){
             
-            let newMessage = this.createMessage("ok", false);
-            this.contacts[this.activeContact].messages.push(newMessage);
-        },
+            this.contacts[this.activeContact].statusCode = 2;
+            setTimeout(() => {
 
+                let newMessage = this.createMessage("ok", false);
+                this.contacts[this.activeContact].messages.push(newMessage);
+                this.contacts[this.activeContact].statusCode = 1;
+
+                setTimeout(() => {
+                    this.contacts[this.activeContact].statusCode = 0;
+                }, 3000);                
+
+            }, 2000);
+
+        },
         createMessage: function(value, sent){
 
             let message = {
@@ -156,12 +170,18 @@ let app = new Vue({
         },
         scrollChat: function(){
             let box = document.querySelector(".messages");
-            box.scrollTop = box.scrollHeight;
-            console.log(box.scrollHeight);
+            if (box != null){
+
+                box.scrollTop = box.scrollHeight;
+                console.log(box.scrollHeight);
+            }
         },
         isEmptyString(value){
 
             return value.trim().length == 0;
+        },
+        isActiveUser(index){
+            return (this.contacts[index].statusCode >= 1 );
         }
         
     },
