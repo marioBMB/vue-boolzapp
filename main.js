@@ -6,7 +6,7 @@ let app = new Vue({
         inputIcon: "fas fa-microphone",
         inputValue: "",
         inputSearchValue: "",
-        activeContact: 1,
+        activeContact: -1,
         user: {
             name: 'Mario',
             avatar: '_0',
@@ -108,9 +108,9 @@ let app = new Vue({
             if (this.inputValue.trim() == ""){
                 this.inputValue = "";
             }
-            if (event.key == "Enter"){
+            else if (event.key == "Enter"){
                 this.submitMessage();
-                this.contacts[this.activeContact].sotredInput = this.inputValue;
+                this.contacts[this.activeContact].storedInput = this.inputValue;
             }
         },
         submitMessage: function(){

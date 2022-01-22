@@ -13,24 +13,29 @@
     <div id="myapp">
 
         <header>
-            
+        </header>
+
+        <main>
             <div class="container">
 
-                <div id="user-panel" class='left'>
-
-                    <div class='user-panel-content'>
-                        <div class="user-info">
-                            <div class="img-box">
-                                <img :src="'img/image'+user.avatar+'.png'" alt="">
+                <div class="left">
+                    
+                    <header id="user-panel">
+                        
+                        <div class='user-panel-content'>
+                            <div class="user-info">
+                                <div class="img-box">
+                                    <img :src="'img/image'+user.avatar+'.png'" alt="">
+                                </div>
+                                <h4 id='username'>{{user.name}}</h4>
                             </div>
-                            <h4 id='username'>{{user.name}}</h4>
+                            <div class="options">
+                                <i class="fas fa-circle-notch"></i>
+                                <i class="fas fa-comment-alt"></i>
+                                <i class="fas fa-ellipsis-v"></i>
+                            </div>
                         </div>
-                        <div class="options">
-                            <i class="fas fa-circle-notch"></i>
-                            <i class="fas fa-comment-alt"></i>
-                            <i class="fas fa-ellipsis-v"></i>
-                        </div>
-                    </div>
+                    </header>
 
                     <aside id="chat-list">
                         
@@ -66,63 +71,83 @@
                         </ul>
                     </aside>
                 </div>
-                <div id="chat-panel" class='right'>
-                    <div class='user-info'>
-                        <div class="img-box">
-                            <img :src="'img/image'+contacts[activeContact].avatar+'.png'" alt="">
-                        </div>
-                        <div class="user-meta">
-                            <h4 class='username'>{{contacts[activeContact].name}}</h4>
-                            <div class="latest-access meta">Ultimo accesso oggi alle {{latestMessage(activeContact).date}}
+
+                <div v-if="activeContact >= 0" class="right">
+                    
+                    <header id="chat-panel">
+
+                        <div class='user-info'>
+                            <div class="img-box">
+                                <img :src="'img/image'+contacts[activeContact].avatar+'.png'" alt="">
+                            </div>
+                            <div class="user-meta">
+                                <h4 class='username'>{{contacts[activeContact].name}}</h4>
+                                <div class="latest-access meta">Ultimo accesso oggi alle {{latestMessage(activeContact).date}}
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="options">
-                        <i class="fas fa-search"></i>
-                        <i class="fas fa-paperclip"></i>
-                        <i class="fas fa-ellipsis-v"></i>
+                        <div class="options">
+                            <i class="fas fa-search"></i>
+                            <i class="fas fa-paperclip"></i>
+                            <i class="fas fa-ellipsis-v"></i>
+                        </div>
+                    </header>
+                    
+                    <div id="chat">
+                        
+                        <div class="messages">
+                            
+                            <div v-for='(message, index) in contacts[activeContact].messages' class="message" :class="message.status">
+                                <span class='text'>{{message.text}}</span>
+                                <time class='meta'>{{message.date}}</time>
+                                
+                                <div class="message-options">
+                                    <i class="options-icon fas fa-chevron-down"></i>
+                                    <ul class="message-dropdown">
+                                        <li class='info'>Info messaggio</li>
+                                        <li class='delete' @click="removeMessage(index)">Elimina</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="input-bar" @keyup="handleInput">
+                            <i class="far fa-smile fa-2x"></i>
+                            <input type="text" v-model="inputValue" placeholder="Scrivi un messaggio...">
+                            <i v-if="isEmptyString(inputValue)" class='fas fa-microphone' @click='submitMessage()'></i>
+                            <i v-else class="fas fa-paper-plane rotated"></i>
+                        </div>
                     </div>
                 </div>
-                
-            </div>
-        </header>
-           
-        <main>
-            <div class="container">
-                
-                <div class="left"></div>
 
-                <div id="chat" class='right'>
+            
+                <div v-else class="intro">
 
-                    <div class="messages">
-
-                        <div v-for='(message, index) in contacts[activeContact].messages' class="message" :class="message.status">
-                            <span class='text'>{{message.text}}</span>
-                            <time class='meta'>{{message.date}}</time>
-
-                            <div class="message-options">
-                                <i class="options-icon fas fa-chevron-down"></i>
-                                <ul class="message-dropdown">
-                                    <li class='info'>Info messaggio</li>
-                                    <li class='delete' @click="removeMessage(index)">Elimina</li>
-                                </ul>
+                    <div class='intro-content'>
+                        
+                        <div class="img-box big">
+                            <img src="img/intro-connection-light.jpg" alt="">
+                        </div>
+                        <div class="text-container" style="opacity: 1; transform: translateY(0px);">
+                            <h1>Mantieni il telefono connesso</h1>
+                            <span>WhatsApp si collega al tuo telefono per sincronizzare i messaggi. Per ridurre l'utilizzo dei dati, collega il telefono al Wi-Fi.</span>
+                            
+                            <div class="download">
+                                <span data-testid="laptop" data-icon="laptop" class="">
+                                    <svg viewBox="0 0 21 18" width="21" height="18" class="">
+                                        <path fill="currentColor" d="M10.426 14.235a.767.767 0 0 1-.765-.765c0-.421.344-.765.765-.765s.765.344.765.765-.344.765-.765.765zM4.309 3.529h12.235v8.412H4.309V3.529zm12.235 9.942c.841 0 1.522-.688 1.522-1.529l.008-8.412c0-.842-.689-1.53-1.53-1.53H4.309c-.841 0-1.53.688-1.53 1.529v8.412c0 .841.688 1.529 1.529 1.529H1.25c0 .842.688 1.53 1.529 1.53h15.294c.841 0 1.529-.688 1.529-1.529h-3.058z"></path>
+                                    </svg>
+                                </span>
+                                <span>Chiama dal desktop con WhatsApp per Mac. <a href="https://www.whatsapp.com/download" target="_blank">Scaricala qui</a>.</span>                                
                             </div>
                         </div>
-                    </div>
-
-                    <div id="input-bar" @keyup="handleInput">
-                        <i class="far fa-smile fa-2x"></i>
-                        <input type="text" v-model="inputValue" placeholder="Scrivi un messaggio...">
-                        <i v-if="isEmptyString(inputVlue)" class='fas fa-microphone' @click='submitMessage()'></i>
-                        <i v-else class="fas fa-paper-plane rotated"></i>
                     </div>
                 </div>
             </div>
         </main>
+    </div>       
         
-    </div>
-
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
     <script src="main.js"></script>
