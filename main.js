@@ -1,4 +1,20 @@
-let app = new Vue({
+Vue.directive('click-outside', {
+    bind: function (el, binding, vnode) {
+      el.clickOutsideEvent = function (event) {
+        // here I check that click was outside the el and his children
+        if (!(el == event.target || el.contains(event.target))) {
+          // and if it did, call method provided in attribute value
+          vnode.context[binding.expression](event);
+        }
+      };
+      document.body.addEventListener('click', el.clickOutsideEvent)
+    },
+    unbind: function (el) {
+      document.body.removeEventListener('click', el.clickOutsideEvent)
+    },
+})
+  
+new Vue({
 
     el: '#myapp',
     data: {
@@ -7,6 +23,7 @@ let app = new Vue({
         inputValue: "",
         inputSearchValue: "",
         activeContact: -1,
+        darkMode: 0,
         user: {
             name: 'Mario',
             avatar: '_0',
@@ -182,14 +199,51 @@ let app = new Vue({
         },
         isActiveUser(index){
             return (this.contacts[index].statusCode >= 1 );
-        }
-        
+        },
+        toggleContextualMenu(event){
+
+            event.stopPropagation(); // impedisce che l'evento di click "fuori" venga intercettato dal gestore closeDropdowns
+            let parentNode = event.target.parentNode;
+            let thisDropdown = parentNode.querySelector(".dropdown");
+            thisDropdown.classList.toggle("show");
+        },
+        deleteMessages(){
+
+            this.contacts[activeContacts].messages = [];
+        },
+        deleteChat(index){
+            this.contacts.splice(index, 1);
+            activeContact = -1;
+        },
+        toggleDarkMode(event){
+
+            let box = document.getElementById("myapp");
+            box.classList.toggle("dark");
+            this.darkMode = !this.darkMode;
+        },
+        closeDropdowns(event){
+            
+            // let dropdowns = document.querySelectorAll(".dropdown");
+
+            // dropdowns.forEach(dropdown => {
+            //     dropdown.style.display = 'none';
+            // });
+        },
+        closeDropdown: function(event){
+            event.stopPropagation();
+            console.log(event.target.parentNode.querySelector(".dropdown"));
+            // event.target.parentNode.querySelector(".dropdown").classList.toggle("show");
+        },
     },
     mounted: function(){
-
         this.filteredContacts = this.contacts;
     },
-    updated: function(){ this.scrollChat() },
-
+    updated: function(){ 
+        this.scrollChat();
+    },
 
 });
+
+
+
+  

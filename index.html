@@ -27,12 +27,16 @@
                                 <div class="img-box">
                                     <img :src="'img/image'+user.avatar+'.png'" alt="">
                                 </div>
-                                <h4 id='username'>{{user.name}}</h4>
+                                <h4 id='username' class='username'>{{user.name}}</h4>
                             </div>
                             <div class="options">
                                 <i class="fas fa-circle-notch"></i>
                                 <i class="fas fa-comment-alt"></i>
-                                <i class="fas fa-ellipsis-v"></i>
+                                <i class="fas fa-ellipsis-v" @click="toggleContextualMenu" v-click-outside="closeDropdown"></i>
+                                
+                                <ul class="dropdown">
+                                    <li id='darkmode-option' @click="toggleDarkMode">{{(darkMode? 'Light' : 'Dark')}} mode</li>
+                                </ul>
                             </div>
                         </div>
                     </header>
@@ -49,7 +53,7 @@
                             </div>
                         </div>
 
-                        <div id="chat-search">
+                        <div id="chat-search" class="entry">
                             <div class="input-box">
                                 <label for="search"><i class="fas fa-search"></i></label>
                                 <input id='search' v-model='inputSearchValue' type="text" placeholder="Cerca o inizia una nuova chat" @keyup='filterInput'>
@@ -90,7 +94,12 @@
                         <div class="options">
                             <i class="fas fa-search"></i>
                             <i class="fas fa-paperclip"></i>
-                            <i class="fas fa-ellipsis-v"></i>
+                            <i class="fas fa-ellipsis-v" @click="toggleContextualMenu" v-click-outside="closeDropdown"></i>
+                            <ul class="dropdown">
+                                <li id='close-chat' @click="activeContact = -1">Chiudi chat</li>
+                                <li id='delete-messages' @click="deleteMessages">Elimina messaggi</li>
+                                <li id='delete-chat' @click="deleteChat(activeContact)">Elimina chat</li>
+                            </ul>
                         </div>
                     </header>
                     
@@ -103,8 +112,8 @@
                                 <time class='meta'>{{message.date}}</time>
                                 
                                 <div class="message-options">
-                                    <i class="options-icon fas fa-chevron-down"></i>
-                                    <ul class="message-dropdown">
+                                    <i class="options-icon fas fa-chevron-down" @click="toggleContextualMenu" v-click-outside="closeDropdown"></i>
+                                    <ul class="dropdown">
                                         <li class='info'>Info messaggio</li>
                                         <li class='delete' @click="removeMessage(index)">Elimina</li>
                                     </ul>

@@ -1,0 +1,27 @@
+
+
+MILESTONE: 1, 2, 3, 4, 5
+
+
+BONUS:
+
+i) evitare che l’utente possa inviare messaggio vuoto o composto solo da spazi
+ii) cambio icona microfono input alla digitazione
+iii) visualizzazione anteprima ultimo messaggio nella voce chat
+iv) inserimento orario corretto nei messaggi
+v) scroll automatico a messaggio più recente
+vi) aggiunta pagina di benvenuto quando nessuna chat è stata selezionata
+vii)aggiornamento dello stato del destinatario della chat corrente quando viene simulata la scrittura del messaggio in automatico
+viii) toggle darkmode
+
+BONUS-extra
+i) memorizzazione messaggio input digitato dall’utente per ciascuna chat, ma non inviato
+
+
+
+in progress:
+
+- lista di citazioni random in messaggio simulato
+- eliminazione messaggi e chat da opzione in alto a sx
+- notifiche numero di messaggi non letti
+- pulsante scroll-to-bottom  quando si risale nella chat
