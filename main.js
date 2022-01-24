@@ -230,9 +230,8 @@ new Vue({
                 dropdown.style.display = 'none';
             });
         },
-        closeDropdown: function(event){
-            event.stopPropagation();
-            event.target.parentNode.querySelector(".dropdown").remove("show");
+        closeDropdownMenu: function(event){ //NOT WORKING
+            // event.target.parentNode.querySelector(".dropdown").remove("show");
         },
     },
     mounted: function(){
