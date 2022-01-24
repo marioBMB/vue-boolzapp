@@ -24,6 +24,7 @@ new Vue({
         inputSearchValue: "",
         activeContact: -1,
         darkMode: 0,
+        darkModeStr: ["light", "dark"],
         user: {
             name: 'Mario',
             avatar: '_0',
@@ -231,7 +232,7 @@ new Vue({
         },
         closeDropdown: function(event){
             event.stopPropagation();
-            console.log(event.target.parentNode.querySelector(".dropdown"));
+            event.target.parentNode.querySelector(".dropdown").remove("show");
             // event.target.parentNode.querySelector(".dropdown").classList.toggle("show");
         },
     },

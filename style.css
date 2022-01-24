@@ -126,7 +126,7 @@ aside ul {
 
 .options i {
     cursor: pointer;
-    margin: 0 5px;
+    margin: 0 10px;
 }
 
 .options i:hover {
@@ -256,7 +256,7 @@ main .container {
 
 .input-box {
     display: flex;
-    padding: 7px;
+    padding: 2px;
     background-color: #f5f5f5;
     height: 2.7rem;
     flex-grow: 2;
@@ -524,8 +524,8 @@ li.entry:not(.active):hover {
     height: 100%;
     background-color: white;
     text-align: center;
-    opacity: 0.98;
     width: 100%;
+    border-bottom: 4px solid #0aa545;
 }
 
 .intro h1 {
@@ -547,13 +547,12 @@ li.entry:not(.active):hover {
     justify-content: center;
     align-items: center;
     padding: 20px;
-    width: 70%;
+    width: 60%;
 }
 
-.big {
+.img-box.big {
     width: max-content;
     height: max-content;
-    display: block;
     border: none;
 }
 
@@ -577,6 +576,11 @@ li.entry:not(.active):hover {
 .dark .intro {
     background-color: #262d31;
     color: white;
+    border-bottom: 4px solid #00988b;
+}
+
+.dark .container header {
+    background-color: #262d31;
 }
 
 .dark .container {
@@ -593,7 +597,7 @@ li.entry:not(.active):hover {
 }
 
 .dark .left:not(header), .dark aside#chat-list {
-    background-color: black;
+    background-color: #131c21;
 }
 
 .dark .intro .img-box {
@@ -617,7 +621,7 @@ li.entry:not(.active):hover {
 }
 
 .dark header {
-    background-color: #2a2f32;
+    background-color: #262d31
 }
 
 .dark .input-box {
@@ -630,6 +634,7 @@ li.entry:not(.active):hover {
 
 .dark .message {
     color: white;
+    box-shadow: 1px 1px 1px #444;
 }
 
 .dark .message.sent {
@@ -684,12 +689,12 @@ li.entry:not(.active):hover {
 }
 
 .dark #chat {
-    background-color: transparent;
+    background-color: #131c21;
 }
 
 .dark #chat::before {
     filter: invert(100%);
-    opacity: 0.2;
+    opacity: 0.05;
 }
 
 .dark input {

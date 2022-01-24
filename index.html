@@ -136,7 +136,8 @@
                     <div class='intro-content'>
                         
                         <div class="img-box big">
-                            <img src="img/intro-connection-light.jpg" alt="">
+                            <img v-if="darkMode" src="img/intro-connection-dark.jpg" alt="">
+                            <img v-else src="img/intro-connection-light.jpg" alt="">
                         </div>
                         <div class="text-container" style="opacity: 1; transform: translateY(0px);">
                             <h1>Mantieni il telefono connesso</h1>
