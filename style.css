@@ -511,10 +511,10 @@ li.entry:not(.active):hover {
     display: block;
 }
 
+} */
 .message:hover .options-icon {
     visibility: visible;
-} */
-
+}
 
 .intro {
     display: flex;
