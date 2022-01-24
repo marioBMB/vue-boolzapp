@@ -692,6 +692,10 @@ li.entry:not(.active):hover {
     opacity: 0.2;
 }
 
+.dark input {
+    color: white;
+}
+
 .dark input::placeholder {
     color: #b1b3b5;
 }

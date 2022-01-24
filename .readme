@@ -15,13 +15,13 @@ vii)aggiornamento dello stato del destinatario della chat corrente quando viene 
 viii) toggle darkmode
 
 BONUS-extra
-i) memorizzazione messaggio input digitato dall’utente per ciascuna chat, ma non inviato
+i) memorizzazione messaggio input digitato ma non inviato dall’utente per ciascuna chat
 
 
 
 in progress:
 
+- eliminazione messaggi e chat da opzione in alto a dx
 - lista di citazioni random in messaggio simulato
-- eliminazione messaggi e chat da opzione in alto a sx
 - notifiche numero di messaggi non letti
 - pulsante scroll-to-bottom  quando si risale nella chat
