@@ -183,7 +183,7 @@ new Vue({
 
             this.filteredContacts = this.contacts.filter((item) => {
 
-                return item.name.includes(this.inputSearchValue);
+                return item.name.toLowerCase().includes(this.inputSearchValue.toLowerCase());
             });
         },
         scrollChat: function(){
@@ -224,16 +224,15 @@ new Vue({
         },
         closeDropdowns(event){
             
-            // let dropdowns = document.querySelectorAll(".dropdown");
+            let dropdowns = document.querySelectorAll(".dropdown");
 
-            // dropdowns.forEach(dropdown => {
-            //     dropdown.style.display = 'none';
-            // });
+            dropdowns.forEach(dropdown => {
+                dropdown.style.display = 'none';
+            });
         },
         closeDropdown: function(event){
             event.stopPropagation();
             event.target.parentNode.querySelector(".dropdown").remove("show");
-            // event.target.parentNode.querySelector(".dropdown").classList.toggle("show");
         },
     },
     mounted: function(){
