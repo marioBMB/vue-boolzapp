@@ -1,20 +1,20 @@
-Vue.directive('click-outside', {
-    bind: function (el, binding, vnode) {
-      el.clickOutsideEvent = function (event) {
-        // here I check that click was outside the el and his children
-        if (!(el == event.target || el.contains(event.target))) {
-          // and if it did, call method provided in attribute value
-          vnode.context[binding.expression](event);
-        }
-      };
-      document.body.addEventListener('click', el.clickOutsideEvent)
-    },
-    unbind: function (el) {
-      document.body.removeEventListener('click', el.clickOutsideEvent)
-    },
-})
+// Vue.directive('click-outside', {
+//     bind: function (el, binding, vnode) {
+//       el.clickOutsideEvent = function (event) {
+//         // here I check that click was outside the el and his children
+//         if (!(el == event.target || el.contains(event.target))) {
+//           // and if it did, call method provided in attribute value
+//           vnode.context[binding.expression](event);
+//         }
+//       };
+//       document.body.addEventListener('click', el.clickOutsideEvent)
+//     },
+//     unbind: function (el) {
+//       document.body.removeEventListener('click', el.clickOutsideEvent)
+//     },
+// })
   
-new Vue({
+let app = new Vue({
 
     el: '#myapp',
     data: {
@@ -202,15 +202,15 @@ new Vue({
             return (this.contacts[index].statusCode >= 1 );
         },
         toggleContextualMenu(event){
-
             event.stopPropagation(); // impedisce che l'evento di click "fuori" venga intercettato dal gestore closeDropdowns
+            console.log("in2");
             let parentNode = event.target.parentNode;
             let thisDropdown = parentNode.querySelector(".dropdown");
             thisDropdown.classList.toggle("show");
         },
         deleteMessages(){
 
-            this.contacts[activeContacts].messages = [];
+            this.contacts[this.activeContact].messages = [];
         },
         deleteChat(index){
             this.contacts.splice(index, 1);
@@ -224,15 +224,18 @@ new Vue({
         },
         closeDropdowns(event){
             
+            console.log("in");
             let dropdowns = document.querySelectorAll(".dropdown");
 
             dropdowns.forEach(dropdown => {
-                dropdown.style.display = 'none';
+                dropdown.classList.remove("show");
             });
         },
-        closeDropdownMenu: function(event){ //NOT WORKING
+        closeDropdown: function(event){ //NOT WORKING
+            console.log(event.target);
             // event.target.parentNode.querySelector(".dropdown").remove("show");
         },
+        
     },
     mounted: function(){
         this.filteredContacts = this.contacts;
@@ -240,6 +243,8 @@ new Vue({
     updated: function(){ 
         this.scrollChat();
     },
+        
+    
 
 });
 

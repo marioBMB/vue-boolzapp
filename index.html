@@ -10,7 +10,7 @@
 </head>
 <body>
     
-    <div id="myapp">
+    <div id="myapp" @click="closeDropdowns">
 
         <header>
         </header>
@@ -32,7 +32,7 @@
                             <div class="options">
                                 <i class="fas fa-circle-notch"></i>
                                 <i class="fas fa-comment-alt"></i>
-                                <i class="fas fa-ellipsis-v" @click="toggleContextualMenu" v-click-outside="closeDropdown"></i>
+                                <i class="fas fa-ellipsis-v" @click="toggleContextualMenu"></i>
                                 
                                 <ul class="dropdown">
                                     <li id='darkmode-option' @click="toggleDarkMode">{{(darkMode? 'Light' : 'Dark')}} mode</li>
@@ -94,7 +94,7 @@
                         <div class="options">
                             <i class="fas fa-search"></i>
                             <i class="fas fa-paperclip"></i>
-                            <i class="fas fa-ellipsis-v" @click="toggleContextualMenu" v-click-outside="closeDropdown"></i>
+                            <i class="fas fa-ellipsis-v" @click="toggleContextualMenu"></i>
                             <ul class="dropdown">
                                 <li id='close-chat' @click="activeContact = -1">Chiudi chat</li>
                                 <li id='delete-messages' @click="deleteMessages">Elimina messaggi</li>
@@ -112,7 +112,7 @@
                                 <time class='meta'>{{message.date}}</time>
                                 
                                 <div class="message-options">
-                                    <i class="options-icon fas fa-chevron-down" @click="toggleContextualMenu" v-click-outside="closeDropdown"></i>
+                                    <i class="options-icon fas fa-chevron-down" @click.stop="toggleContextualMenu"></i>
                                     <ul class="dropdown">
                                         <li class='info'>Info messaggio</li>
                                         <li class='delete' @click="removeMessage(index)">Elimina</li>

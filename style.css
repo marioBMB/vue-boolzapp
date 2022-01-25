@@ -175,7 +175,7 @@ aside ul {
 
 
 #chat-panel {
-    margin-bottom: 12px;
+    margin-bottom: 16px;
 }
 #chat-list {
     width: 100%;
@@ -213,7 +213,7 @@ aside ul {
     background: rgba(229, 221, 213, 1);
     position: relative;
     z-index: 2;
-    height: calc(100% - 112px + 20px);
+    height: calc(100% - 116px + 20px);
 }
 
 #chat::before {
@@ -428,14 +428,14 @@ li.entry:not(.active):hover {
     content: "";
     width: 0;
     height: 0;
-    border-top: 7px solid transparent;
+    border-top: 10px solid transparent;
     border-left: 10px solid #d4fbc4;
-    border-bottom: 7px solid transparent;
+    border-bottom: 10px solid transparent;
     margin-left: 10px;
     position: absolute;
     float: right !important;
-    right: -5px;
-    top: -2px;
+    right: -4px;
+    top: -4px;
     transform: rotate(90deg);
     border-radius: 3px;
 } 
@@ -445,14 +445,14 @@ li.entry:not(.active):hover {
     content: "";
     width: 0;
     height: 0;
-    border-top: 7px solid transparent;
+    border-top: 10px solid transparent;
     border-left: 10px solid white;
-    border-bottom: 7px solid transparent;
+    border-bottom: 10px solid transparent;
     margin-left: 10px;
     position: absolute;
     float: right;
-    left: -15px;
-    top: -2px;
+    left: -14px;
+    top: -4px;
     transform: rotate(90deg);
     border-radius: 3px;
 } 
@@ -571,12 +571,15 @@ li.entry:not(.active):hover {
 
 
 
+#myapp.dark > header {
+    background-color: #056162;
+}
 
 
 .dark .intro {
     background-color: #262d31;
     color: white;
-    border-bottom: 4px solid #00988b;
+    border-bottom: 4px solid #056162;
 }
 
 .dark .container header {
@@ -707,4 +710,8 @@ li.entry:not(.active):hover {
 
 .dark .username {
     color: white;
+}
+
+.dark #notifications {
+    background-color: #085373;
 }
